@@ -21,13 +21,15 @@ public class navigatetoSearch {
 	WebDriver driver;
 	WaitHelper waitHelper;
 	
-	//Constructor
+	//CONSTRUCTOR
+	
 	public navigatetoSearch(WebDriver driver) {
 		this.driver = driver;
 		waitHelper = new WaitHelper(driver,10);
 	}
 	
-	//Locators
+	//LOCATORS
+	
 	By SchandMapMainMenu = By.xpath("//a[normalize-space()='Schedules and Maps']");
 	By BusSubMenu = By.xpath("//a[normalize-space()='Bus']");
 	By searchBox = By.id("find-schedule-searchbox"); 
@@ -46,7 +48,7 @@ public class navigatetoSearch {
 	By myfavtxtview = By.xpath("//*[@id=\"content\"]/div[1]/section[3]/my-gtfs-favourites/ul/li");
 	
 	
-	//Action Methods
+	//ACTION METHODS
 	
 	// Page Validation
 	public boolean isMainpageLoaded(String HomePageTitle) {
@@ -118,7 +120,7 @@ public class navigatetoSearch {
 		}
 	}
 	
-	//Click on bus
+	//Click on bus 
 	public void selectBusfromResultList(String busRoute) {
 		
 		  // Wait for the results container
@@ -145,7 +147,7 @@ public class navigatetoSearch {
 		//Method to select (enter) tomorrow’s date into the date input field
 		LocalDate tomorrow = LocalDate.now().plusDays(1);
 		
-		//Format date as yyyy/mm/dd 
+		//Format date as yyyy/MM/dd 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		String formattedDate = tomorrow.format(formatter);
 		
@@ -158,6 +160,7 @@ public class navigatetoSearch {
         
 	}
 	
+	//Add the start time which is in HH:MM format
 	public void setStartTime(String startTime) {
 		WebElement startInput = driver.findElement(StartTime);
         waitHelper.waitforElementsToBeClickable(startInput);
@@ -171,7 +174,8 @@ public class navigatetoSearch {
 
         System.out.println("Start time set to: " + startTime);
 	}
-
+    
+	//Add the end time which is in HH:MM format
 	public void setEndTime(String endTime) {
 		 WebElement endInput = driver.findElement(EndTime);
 	        waitHelper.waitforElementsToBeClickable(endInput);
@@ -184,6 +188,7 @@ public class navigatetoSearch {
 	        System.out.println("End time set to: " + endTime);
 	}
 	
+	//Click on search button
 	public void clickOnSchSearchBtn() {
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -218,6 +223,7 @@ public class navigatetoSearch {
 	    System.out.println("Final JS click executed!");
 	}
     
+	//Validate Bus Schedules Result table
 	public boolean validateBusSchResults() {
 		
 		try {
@@ -234,7 +240,7 @@ public class navigatetoSearch {
 		
 	}
 		
-	//Click on stop
+	    //Click on stop
 		public void selectStopfromResultList(String stopList) {
 			
 			  // Wait for the results container
@@ -252,7 +258,6 @@ public class navigatetoSearch {
 		}
 		
 	//click on Add to favorites
-		
 	public void clickOnAddToFav() {
 		
 		WebElement AddToFavbtn = driver.findElement(AddToFav);
@@ -261,7 +266,7 @@ public class navigatetoSearch {
 		
 	}
 	
-	
+	//Edit the Stop name
 	public void editTxtNameAndAddToFav(String rename_stoptxt) {
 	    // Rename the stop name
 	    WebElement nameTxtbox = driver.findElement(NameTxtBox);
@@ -277,6 +282,8 @@ public class navigatetoSearch {
 	    System.out.println("Stop renamed to: " + rename_stoptxt + " and added to favorites.");
 	}
 	
+	
+	//Check that above step "Add to favourites" is displayed on the manage my favourites page
 	public void NavToManageMyFavPage() {
 		
 		//click on Manage my favourites page
